@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Storyboarding Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700;800&family=Literata:opsz,wght@7..72,400;7..72,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css', v=asset_version) }}" />
+  </head>
+  <body>
+    <div class="backdrop backdrop-one"></div>
+    <div class="backdrop backdrop-two"></div>
+
+    <main class="layout">
+      <header class="hero">
+        <p class="eyebrow">AI Storyboarding Lab</p>
+        <h1>Turn One Idea Into A Cinematic Four-Panel Storyboard</h1>
+          <p class="subtitle">
+          AI writes the narrative beats, then generates panel images. Fully free, no API keys required.
+        </p>
+      </header>
+
+      <section class="composer">
+        <form id="story-form" novalidate>
+          <label for="prompt">Story idea</label>
+          <textarea
+            id="prompt"
+            name="prompt"
+            rows="4"
+            placeholder="Example: A shy engineer finds an old map in a train station and chases a legend through a stormy city night."
+            required
+          ></textarea>
+
+          <div class="prompt-snippets">
+            <p class="snippet-label">Try these prompts:</p>
+            <div class="snippet-chips">
+              <button type="button" class="snippet-chip" data-prompt="A young engineer discovers a hidden map in an old train station">🗺️ Hidden Map</button>
+              <button type="button" class="snippet-chip" data-prompt="A mysterious letter arrives at midnight, leading to an unexpected adventure through the city">✉️ Midnight Letter</button>
+              <button type="button" class="snippet-chip" data-prompt="An astronaut lands on an alien planet and finds a garden of glowing flowers">🚀 Alien Garden</button>
+              <button type="button" class="snippet-chip" data-prompt="A detective follows clues through a foggy Victorian London street">🔍 Victorian Mystery</button>
+            </div>
+          </div>
+
+          <div class="composer-row">
+            <button id="generate-btn" type="submit">Generate storyboard</button>
+            <p class="mode-note">Free AI • ~30-45 seconds</p>
+          </div>
+        </form>
+
+        <div id="loading" class="status hidden" aria-live="polite">
+          <div class="spinner" aria-hidden="true"></div>
+          <p id="loading-text">Writing scenes and generating panel images. This may take around 20-60 seconds.</p>
+          <div class="progress-bar" id="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="loading-steps" id="loading-steps">
+            <span class="step" data-step="1">✍️ Writing story</span>
+            <span class="step" data-step="2">🎨 Generating images</span>
+            <span class="step" data-step="3">✅ Finalizing</span>
+          </div>
+        </div>
+
+        <div id="error" class="status error hidden" role="alert"></div>
+      </section>
+
+      <section id="result" class="result hidden" aria-live="polite">
+        <div class="result-head">
+          <h2 id="story-title">Storyboard</h2>
+          <p>Generated as four linked visual beats.</p>
+        </div>
+        <div id="panels" class="panel-grid"></div>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js', v=asset_version) }}" defer></script>
+  </body>
+</html>
